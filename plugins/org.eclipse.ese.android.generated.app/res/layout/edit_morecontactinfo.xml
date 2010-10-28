@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout 
+	android:id="@+id/layout"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<TextView 
+		android:id="@+id/wMoreLabel"
+		android:layout_width="wrap_content"
+		android:layout_height="40px"
+		android:text="More"
+		android:layout_x="20px"
+		android:layout_y="28px">
+	</TextView>
+	<EditText 
+		android:id="@+id/wMore"
+		android:layout_width="120px"
+		android:layout_height="40px"
+		android:text=""
+		android:textSize="18sp" 
+		android:layout_x="180px"
+		android:layout_y="20px">
+	</EditText>
+	
+	<TextView 
+		android:id="@+id/wMore2Label"
+		android:layout_width="wrap_content"
+		android:layout_height="40px"
+		android:text="More2"
+		android:layout_x="20px"
+		android:layout_y="68px">
+	</TextView>
+	<EditText 
+		android:id="@+id/wMore2"
+		android:layout_width="120px"
+		android:layout_height="40px"
+		android:text=""
+		android:textSize="18sp" 
+		android:layout_x="180px"
+		android:layout_y="60px">
+	</EditText>
+	
+	<Button
+		android:id="@+id/wBack"
+		android:layout_width="280px"
+		android:layout_height="40px"
+		android:text="Back"
+		android:layout_x="20px"
+		android:layout_y="110px">
+	</Button>
+	
+	
+</AbsoluteLayout>
