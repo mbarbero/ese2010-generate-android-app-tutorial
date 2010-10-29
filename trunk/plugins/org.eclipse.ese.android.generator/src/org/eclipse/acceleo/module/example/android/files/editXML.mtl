@@ -12,6 +12,8 @@
 [/comment]
 [module editXML('http://www.eclipse.org/acceleo/example/android')/]
 
+[import common /]
+
 [template public editXML(a : Activity)]
 	[file ('/res/layout/edit_' + a.name.toLower() + '.xml', false, 'UTF-8')]
 <?xml version="1.0" encoding="utf-8"?>
@@ -59,16 +61,6 @@
 		android:layout_y="[20 + 40 * (a.widgets->indexOf(w) - 1)/]px">
 	</Spinner>
 	
-		[elseif (w.oclIsKindOf(Button))]
-	<Button
-		android:id="@+id/w[w.name.toUpperFirst()/]"
-		android:layout_width="280px"
-		android:layout_height="40px"
-		android:text="[w.name.toUpperFirst()/]"
-		android:layout_x="20px"
-		android:layout_y="[30 + 40 * (a.widgets->indexOf(w) - 1)/]px">
-	</Button>
-	
 		[elseif (w.oclIsKindOf(Link))]
 	<Button
 		android:id="@+id/w[w.name.toUpperFirst()/]"
@@ -81,6 +73,26 @@
 
 		[/if]
 	[/for]
+	
+	[if (a = eContainer(Application).rootActivity())]
+	<Button
+		android:id="@+id/wSave"
+		android:layout_width="280px"
+		android:layout_height="40px"
+		android:text="Save"
+		android:layout_x="20px"
+		android:layout_y="[30 + 40 * (a.widgets->size())/]px">
+	</Button>
+	[else]
+	<Button
+		android:id="@+id/wBack[name.toUpperFirst()/]"
+		android:layout_width="280px"
+		android:layout_height="40px"
+		android:text="Back"
+		android:layout_x="20px"
+		android:layout_y="[30 + 40 * (a.widgets->size())/]px">
+	</Button>	
+	[/if]
 	
 </AbsoluteLayout>
 	[/file]

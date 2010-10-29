@@ -24,22 +24,20 @@ import android.widget.Spinner;
  */
 public class ContactEdit extends Activity {
 	
-	private static final int ACTIVITY_NEXT = 7;
+	private static final int ACTIVITY_PHONENUMBERS = 5;
 
 	private EditText wFirstName;
 
 	private EditText wLastName;
 
-	private EditText wPhoneNumber;
-
 	private EditText wEmail;
 
 	private Spinner wCountry;
 
+	private Button wPhoneNumbers;
+
+	
 	private Button wSave;
-
-	private Button wNext;
-
 	
 	private Long rowId;
     private MyContactDbAdapter dbHelper;
@@ -68,12 +66,25 @@ public class ContactEdit extends Activity {
 
 		wLastName = (EditText) findViewById(R.id.wLastName);
 
-		wPhoneNumber = (EditText) findViewById(R.id.wPhoneNumber);
-
 		wEmail = (EditText) findViewById(R.id.wEmail);
 
 		wCountry = (Spinner) findViewById(R.id.wCountry);
 
+		wPhoneNumbers = (Button) findViewById(R.id.wPhoneNumbers);
+		wPhoneNumbers.setText("PhoneNumbers");
+		wPhoneNumbers.setOnClickListener(new Button.OnClickListener() {
+			public void onClick(View v) {
+				if (rowId == null) {
+					saveOrCreate();
+				}
+			
+				Intent i = new Intent(v.getContext(), PhoneNumbersEdit.class);
+		        i.putExtra(MyContactDbAdapter.KEY_ROWID, rowId);
+		        startActivityForResult(i, ACTIVITY_PHONENUMBERS);
+			}
+		});
+
+	
 		wSave = (Button) findViewById(R.id.wSave);
 		wSave.setText("Save");
 		wSave.setOnClickListener(new Button.OnClickListener() {
@@ -82,21 +93,7 @@ public class ContactEdit extends Activity {
 	        	 finish();
 			}
 		});
-		
-		wNext = (Button) findViewById(R.id.wNext);
-		wNext.setText("Next");
-		wNext.setOnClickListener(new Button.OnClickListener() {
-			public void onClick(View v) {
-				if (rowId == null) {
-					saveOrCreate();
-				}
-			
-				Intent i = new Intent(v.getContext(), MoreContactInfoEdit.class);
-		        i.putExtra(MyContactDbAdapter.KEY_ROWID, rowId);
-		        startActivityForResult(i, ACTIVITY_NEXT);
-			}
-		});
-
+	
 	}
 	
     private void populateFields() {
@@ -107,8 +104,6 @@ public class ContactEdit extends Activity {
             wFirstName.setText(c.getString(c.getColumnIndexOrThrow(MyContactDbAdapter.KEY_FIRSTNAME)));
             
             wLastName.setText(c.getString(c.getColumnIndexOrThrow(MyContactDbAdapter.KEY_LASTNAME)));
-            
-            wPhoneNumber.setText(c.getString(c.getColumnIndexOrThrow(MyContactDbAdapter.KEY_PHONENUMBER)));
             
             wEmail.setText(c.getString(c.getColumnIndexOrThrow(MyContactDbAdapter.KEY_EMAIL)));
             
@@ -134,20 +129,18 @@ public class ContactEdit extends Activity {
         
         String lastName = wLastName.getText().toString();
         
-        String phoneNumber = wPhoneNumber.getText().toString();
-        
         String email = wEmail.getText().toString();
         
         int country = wCountry.getSelectedItemPosition();
 
 
 		if (rowId == null) {
-	        long id = dbHelper.createContact(firstName,lastName,phoneNumber,email,country);
+	        long id = dbHelper.createContact(firstName,lastName,email,country);
 	        if (id > 0) {
 	            rowId = id;
 	        }
 	    } else {
-	        dbHelper.updateNote(rowId,firstName,lastName,phoneNumber,email,country);
+	        dbHelper.updateNote(rowId,firstName,lastName,email,country);
 	    }
     
     }
@@ -165,13 +158,11 @@ public class ContactEdit extends Activity {
 
 		result.append(wLastName.getText().toString());
 
-		result.append(wPhoneNumber.getText().toString());
-
 		result.append(wEmail.getText().toString());
 
 		result.append(wCountry.getSelectedItemPosition());
 
-		// We don't display the "Save" Button.
+		// We don't display the "PhoneNumbers" Link.
 
 
 		return result.toString();

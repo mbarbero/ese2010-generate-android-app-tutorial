@@ -6,15 +6,15 @@
 	xmlns:android="http://schemas.android.com/apk/res/android">
 
 	<TextView 
-		android:id="@+id/wMoreLabel"
+		android:id="@+id/wCellPhoneLabel"
 		android:layout_width="wrap_content"
 		android:layout_height="40px"
-		android:text="More"
+		android:text="CellPhone"
 		android:layout_x="20px"
 		android:layout_y="28px">
 	</TextView>
 	<EditText 
-		android:id="@+id/wMore"
+		android:id="@+id/wCellPhone"
 		android:layout_width="120px"
 		android:layout_height="40px"
 		android:text=""
@@ -24,15 +24,15 @@
 	</EditText>
 	
 	<TextView 
-		android:id="@+id/wMore2Label"
+		android:id="@+id/wWorkPhoneLabel"
 		android:layout_width="wrap_content"
 		android:layout_height="40px"
-		android:text="More2"
+		android:text="WorkPhone"
 		android:layout_x="20px"
 		android:layout_y="68px">
 	</TextView>
 	<EditText 
-		android:id="@+id/wMore2"
+		android:id="@+id/wWorkPhone"
 		android:layout_width="120px"
 		android:layout_height="40px"
 		android:text=""
@@ -41,14 +41,14 @@
 		android:layout_y="60px">
 	</EditText>
 	
+	
 	<Button
-		android:id="@+id/wBack"
+		android:id="@+id/wBackPhoneNumbers"
 		android:layout_width="280px"
 		android:layout_height="40px"
 		android:text="Back"
 		android:layout_x="20px"
 		android:layout_y="110px">
-	</Button>
-	
+	</Button>	
 	
 </AbsoluteLayout>

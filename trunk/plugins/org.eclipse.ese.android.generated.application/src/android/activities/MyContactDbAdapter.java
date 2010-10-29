@@ -28,15 +28,13 @@ public class MyContactDbAdapter {
     
     public static final String KEY_LASTNAME = "lastname";
     
-    public static final String KEY_PHONENUMBER = "phonenumber";
-    
     public static final String KEY_EMAIL = "email";
     
     public static final String KEY_COUNTRY = "country";
 
-    public static final String KEY_MORE = "more";
+    public static final String KEY_CELLPHONE = "cellphone";
     
-    public static final String KEY_MORE2 = "more2";
+    public static final String KEY_WORKPHONE = "workphone";
     
       
     private static final String DATABASE_NAME = "mycontact_db";
@@ -50,15 +48,13 @@ public class MyContactDbAdapter {
 
                     + ", lastname text not null"
 
-                    + ", phonenumber text not null"
-
                     + ", email text not null"
 
                     + ", country integer not null"
 
-                    + ", more text not null"
+                    + ", cellphone text not null"
 
-                    + ", more2 text not null"
+                    + ", workphone text not null"
 
 
                     + ");";
@@ -101,36 +97,32 @@ public class MyContactDbAdapter {
         dbHelper.close();
     }
 
-    public long createContact(String firstName, String lastName, String phoneNumber, String email, int country) {
+    public long createContact(String firstName, String lastName, String email, int country) {
         ContentValues args = new ContentValues();
         
         args.put(KEY_FIRSTNAME, firstName);
         
         args.put(KEY_LASTNAME, lastName);
         
-        args.put(KEY_PHONENUMBER, phoneNumber);
-        
         args.put(KEY_EMAIL, email);
         
         args.put(KEY_COUNTRY, country);
 
 	
-        args.put(KEY_MORE2, "");
+        args.put(KEY_WORKPHONE, "");
         
-        args.put(KEY_MORE, "");
+        args.put(KEY_CELLPHONE, "");
         
         
         return db.insert(DATABASE_TABLE, null, args);
     }
     
-    public boolean updateNote(long rowId, String firstName, String lastName, String phoneNumber, String email, int country) {
+    public boolean updateNote(long rowId, String firstName, String lastName, String email, int country) {
         ContentValues args = new ContentValues();
         
 		args.put(KEY_FIRSTNAME, firstName);
 	        
 		args.put(KEY_LASTNAME, lastName);
-	        
-		args.put(KEY_PHONENUMBER, phoneNumber);
 	        
 		args.put(KEY_EMAIL, email);
 	        
@@ -139,12 +131,12 @@ public class MyContactDbAdapter {
         
         return db.update(DATABASE_TABLE, args, KEY_ROWID + "=" + rowId, null) > 0;
     }
-    public boolean updateNote(long rowId, String more, String more2) {
+    public boolean updateNote(long rowId, String cellPhone, String workPhone) {
         ContentValues args = new ContentValues();
         
-		args.put(KEY_MORE, more);
+		args.put(KEY_CELLPHONE, cellPhone);
 	        
-		args.put(KEY_MORE2, more2);
+		args.put(KEY_WORKPHONE, workPhone);
 	        
         
         return db.update(DATABASE_TABLE, args, KEY_ROWID + "=" + rowId, null) > 0;
@@ -161,15 +153,13 @@ public class MyContactDbAdapter {
         		
         		, KEY_LASTNAME
         		
-        		, KEY_PHONENUMBER
-        		
         		, KEY_EMAIL
         		
         		, KEY_COUNTRY
 
-        		, KEY_MORE
+        		, KEY_CELLPHONE
         		
-        		, KEY_MORE2
+        		, KEY_WORKPHONE
         		
         		
         	}, null, null, null, null, null);
@@ -182,15 +172,13 @@ public class MyContactDbAdapter {
         		
         		, KEY_LASTNAME
         		
-        		, KEY_PHONENUMBER
-        		
         		, KEY_EMAIL
         		
         		, KEY_COUNTRY
 
-        		, KEY_MORE
+        		, KEY_CELLPHONE
         		
-        		, KEY_MORE2
+        		, KEY_WORKPHONE
         		
         		
         	}, KEY_ROWID + "=" + rowId, null, null, null, null, null);
