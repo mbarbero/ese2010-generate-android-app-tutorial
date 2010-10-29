@@ -1,0 +1,11 @@
+Application MyNotes
+
+Activity Note {
+	Text title
+	Text mainText
+	Link SubNote -> SubNote 
+}
+
+Activity SubNote {
+	Text mainText2
+}

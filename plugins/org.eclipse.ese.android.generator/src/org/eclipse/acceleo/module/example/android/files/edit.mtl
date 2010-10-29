@@ -53,14 +53,17 @@ public class [a.name.toUpperFirst()/]Edit extends Activity {
 		[elseif (w.oclIsKindOf(Spinner))]
 	private Spinner w[w.name.toUpperFirst()/];
 
-		[elseif (w.oclIsKindOf(Button))]
-	private Button w[w.name.toUpperFirst()/];
-
 		[elseif (w.oclIsKindOf(Link))]
 	private Button w[w.name.toUpperFirst()/];
 
 		[/if]
 	[/for]
+	
+	[if (a = eContainer(Application).rootActivity())]
+	private Button wSave;
+	[else]
+	private Button wBack[name.toUpperFirst()/];
+	[/if]
 	
 	private Long rowId;
     private [eContainer(Application).name.toUpperFirst()/]DbAdapter dbHelper;
@@ -92,16 +95,6 @@ public class [a.name.toUpperFirst()/]Edit extends Activity {
 		[elseif (w.oclIsKindOf(Spinner))]
 		w[w.name.toUpperFirst()/] = (Spinner) findViewById(R.id.w[w.name.toUpperFirst()/]);
 
-		[elseif (w.oclIsKindOf(Button))]
-		w[w.name.toUpperFirst()/] = (Button) findViewById(R.id.w[w.name.toUpperFirst()/]);
-		w[w.name.toUpperFirst()/].setText("[w.name.toUpperFirst()/]");
-		w[w.name.toUpperFirst()/].setOnClickListener(new Button.OnClickListener() {
-			public void onClick(View v) {
-				 setResult(RESULT_OK);
-	        	 finish();
-			}
-		});
-		
 		[elseif (w.oclIsKindOf(Link))]
 		w[w.name.toUpperFirst()/] = (Button) findViewById(R.id.w[w.name.toUpperFirst()/]);
 		w[w.name.toUpperFirst()/].setText("[w.name.toUpperFirst()/]");
@@ -113,12 +106,33 @@ public class [a.name.toUpperFirst()/]Edit extends Activity {
 			
 				Intent i = new Intent(v.getContext(), [w.oclAsType(Link).activity.name.toUpperFirst()/]Edit.class);
 		        i.putExtra([eContainer(Application).name.toUpperFirst()/]DbAdapter.KEY_ROWID, rowId);
-		        startActivityForResult(i, ACTIVITY_NEXT);
+		        startActivityForResult(i, ACTIVITY_[w.name.toUpper()/]);
 			}
 		});
 
 		[/if]
 	[/for]
+	
+	[if (a = eContainer(Application).rootActivity())]
+		wSave = (Button) findViewById(R.id.wSave);
+		wSave.setText("Save");
+		wSave.setOnClickListener(new Button.OnClickListener() {
+			public void onClick(View v) {
+				 setResult(RESULT_OK);
+	        	 finish();
+			}
+		});
+	[else]
+		wBack[name.toUpperFirst()/] = (Button) findViewById(R.id.wBack[name.toUpperFirst()/]);
+		wBack[name.toUpperFirst()/].setText("Back");
+		wBack[name.toUpperFirst()/].setOnClickListener(new Button.OnClickListener() {
+			public void onClick(View v) {
+				 setResult(RESULT_OK);
+	        	 finish();
+			}
+		});
+	[/if]
+	
 	}
 	
     private void populateFields() {
@@ -193,8 +207,8 @@ public class [a.name.toUpperFirst()/]Edit extends Activity {
 		[elseif (w.oclIsKindOf(Spinner))]
 		result.append(w[w.name.toUpperFirst()/].getSelectedItemPosition());
 
-		[elseif (w.oclIsKindOf(Button))]
-		// We don't display the "[w.name.toUpperFirst()/]" Button.
+		[elseif (w.oclIsKindOf(Link))]
+		// We don't display the "[w.name.toUpperFirst()/]" Link.
 
 		[/if]
 	[/for]
@@ -207,7 +221,7 @@ public class [a.name.toUpperFirst()/]Edit extends Activity {
 [/template]
 
 [template public allWidgets (a : Activity) ]
-[a.widgets->select(not oclIsKindOf(Button) and not oclIsKindOf(Link)).oneWidget()->sep(',')/]
+[a.widgets->select(not oclIsKindOf(Link)).oneWidget()->sep(',')/]
 [/template]
 
 [template public oneWidget (widget : Widget)]

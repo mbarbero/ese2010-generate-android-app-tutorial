@@ -20,17 +20,17 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 /**
- * MoreContactInfoActivity.
+ * PhoneNumbersActivity.
  */
-public class MoreContactInfoEdit extends Activity {
+public class PhoneNumbersEdit extends Activity {
 	
 
-	private EditText wMore;
+	private EditText wCellPhone;
 
-	private EditText wMore2;
+	private EditText wWorkPhone;
 
-	private Button wBack;
-
+	
+	private Button wBackPhoneNumbers;
 	
 	private Long rowId;
     private MyContactDbAdapter dbHelper;
@@ -41,7 +41,7 @@ public class MoreContactInfoEdit extends Activity {
 		super.onCreate(instanceState);
 		dbHelper = new MyContactDbAdapter(this);
 	    dbHelper.open();
-		setContentView(R.layout.edit_morecontactinfo);
+		setContentView(R.layout.edit_phonenumbers);
 	
 		rowId = instanceState != null ? instanceState.getLong(MyContactDbAdapter.KEY_ROWID) : null;
 		if (rowId == null) {
@@ -55,19 +55,20 @@ public class MoreContactInfoEdit extends Activity {
 	}
 
 	private void initControls() {
-		wMore = (EditText) findViewById(R.id.wMore);
+		wCellPhone = (EditText) findViewById(R.id.wCellPhone);
 
-		wMore2 = (EditText) findViewById(R.id.wMore2);
+		wWorkPhone = (EditText) findViewById(R.id.wWorkPhone);
 
-		wBack = (Button) findViewById(R.id.wBack);
-		wBack.setText("Back");
-		wBack.setOnClickListener(new Button.OnClickListener() {
+	
+		wBackPhoneNumbers = (Button) findViewById(R.id.wBackPhoneNumbers);
+		wBackPhoneNumbers.setText("Back");
+		wBackPhoneNumbers.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
 				 setResult(RESULT_OK);
 	        	 finish();
 			}
 		});
-		
+	
 	}
 	
     private void populateFields() {
@@ -75,9 +76,9 @@ public class MoreContactInfoEdit extends Activity {
             Cursor c = dbHelper.fetchNote(rowId);
             startManagingCursor(c);
             
-            wMore.setText(c.getString(c.getColumnIndexOrThrow(MyContactDbAdapter.KEY_MORE)));
+            wCellPhone.setText(c.getString(c.getColumnIndexOrThrow(MyContactDbAdapter.KEY_CELLPHONE)));
             
-            wMore2.setText(c.getString(c.getColumnIndexOrThrow(MyContactDbAdapter.KEY_MORE2)));
+            wWorkPhone.setText(c.getString(c.getColumnIndexOrThrow(MyContactDbAdapter.KEY_WORKPHONE)));
             
         }
     }
@@ -95,12 +96,12 @@ public class MoreContactInfoEdit extends Activity {
     }
     
     private void saveOrCreate() {
-        String more = wMore.getText().toString();
+        String cellPhone = wCellPhone.getText().toString();
         
-        String more2 = wMore2.getText().toString();
+        String workPhone = wWorkPhone.getText().toString();
         
 
-		dbHelper.updateNote(rowId,more,more2);
+		dbHelper.updateNote(rowId,cellPhone,workPhone);
 	
     }
     
@@ -113,11 +114,9 @@ public class MoreContactInfoEdit extends Activity {
 	public String toString() {
 		StringBuilder result = new StringBuilder();
 
-		result.append(wMore.getText().toString());
+		result.append(wCellPhone.getText().toString());
 
-		result.append(wMore2.getText().toString());
-
-		// We don't display the "Back" Button.
+		result.append(wWorkPhone.getText().toString());
 
 
 		return result.toString();

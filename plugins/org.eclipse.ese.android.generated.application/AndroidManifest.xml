@@ -9,7 +9,7 @@
             </intent-filter>
         </activity>
 		<activity android:name=".ContactEdit"/>
-		<activity android:name=".MoreContactInfoEdit"/>
+		<activity android:name=".PhoneNumbersEdit"/>
 	</application>
 </manifest>
 

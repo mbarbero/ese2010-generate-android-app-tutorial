@@ -199,11 +199,11 @@ public class [a.name.toUpperFirst()/]DbAdapter {
 [/template]
 
 [template public allWidgets (a : Application) ]
-[activities.widgets->flatten()->select(not oclIsKindOf(Button) and not oclIsKindOf(Link)).oneWidget()->sep(', ')/]
+[activities.widgets->flatten()->select(not oclIsKindOf(Link)).oneWidget()->sep(', ')/]
 [/template]
 
 [template public allWidgets (a : Activity) ]
-[widgets->select(not oclIsKindOf(Button) and not oclIsKindOf(Link)).oneWidget()->sep(', ')/]
+[widgets->select(not oclIsKindOf(Link)).oneWidget()->sep(', ')/]
 [/template]
 
 [template public oneWidget (widget : Widget) ]

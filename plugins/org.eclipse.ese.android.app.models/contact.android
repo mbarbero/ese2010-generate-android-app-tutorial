@@ -3,15 +3,12 @@ Application MyContact
 Activity Contact {
 	Text firstName
 	Text lastName
-	Text phoneNumber
 	Text email
 	Spinner country
-	Button save
-	Link next -> MoreContactInfo
+	Link phoneNumbers -> PhoneNumbers 
 }
 
-Activity MoreContactInfo {
-	Text more
-	Text more2
-	Button back
+Activity PhoneNumbers {
+	Text cellPhone
+	Text workPhone
 }

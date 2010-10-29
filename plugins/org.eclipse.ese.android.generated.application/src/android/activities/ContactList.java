@@ -51,8 +51,6 @@ public class ContactList extends ListActivity {
         		
         		MyContactDbAdapter.KEY_LASTNAME,
         		
-        		MyContactDbAdapter.KEY_PHONENUMBER,
-        		
         		MyContactDbAdapter.KEY_EMAIL,
         		
         		MyContactDbAdapter.KEY_COUNTRY,
@@ -62,8 +60,6 @@ public class ContactList extends ListActivity {
         		R.id.textRowFirstName,
         		
         		R.id.textRowLastName,
-        		
-        		R.id.textRowPhoneNumber,
         		
         		R.id.textRowEmail,
         		
